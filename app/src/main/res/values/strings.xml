@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">My Movies</string>
+    <string name="api_key" >your api key</string>
+</resources>
