@@ -3,6 +3,8 @@ package com.juanpineda.mymovies.data
 import com.juanpineda.domain.Movie
 import com.juanpineda.mymovies.data.database.Movie as DomainMovie
 import com.juanpineda.mymovies.data.server.Movie as ServerMovie
+import com.juanpineda.domain.MovieImage
+import com.juanpineda.mymovies.data.server.TheMoveDbImage
 
 fun Movie.toRoomMovie(): DomainMovie =
     DomainMovie(
@@ -16,7 +18,9 @@ fun Movie.toRoomMovie(): DomainMovie =
         originalTitle,
         popularity,
         voteAverage,
-        favorite
+        favorite,
+        adult,
+        myVote
     )
 
 fun DomainMovie.toDomainMovie(): Movie = Movie(
@@ -30,12 +34,14 @@ fun DomainMovie.toDomainMovie(): Movie = Movie(
     originalTitle,
     popularity,
     voteAverage,
-    favorite
+    favorite,
+    adult,
+    myVote
 )
 
 fun ServerMovie.toDomainMovie(): Movie =
     Movie(
-        0,
+        id,
         title,
         overview,
         releaseDate,
@@ -45,5 +51,17 @@ fun ServerMovie.toDomainMovie(): Movie =
         originalTitle,
         popularity,
         voteAverage,
-        false
+        false,
+        adult,
+        0f
+    )
+
+fun TheMoveDbImage.toDomainMovie(): MovieImage =
+    MovieImage(
+        aspect_ratio,
+        file_path,
+        height,
+        vote_average,
+        vote_count,
+        width
     )

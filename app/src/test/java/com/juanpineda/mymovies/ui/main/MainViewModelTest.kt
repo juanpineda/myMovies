@@ -2,6 +2,7 @@ package com.juanpineda.mymovies.ui.main
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.juanpineda.data.result.SuccessResponse
 import com.juanpineda.mymovies.testshared.mockedMovie
 import com.juanpineda.mymovies.ui.main.MainViewModel.UiModel
 import com.juanpineda.usecases.GetPopularMovies
@@ -48,7 +49,7 @@ class MainViewModelTest {
         runBlocking {
 
             val movies = listOf(mockedMovie.copy(id = 1))
-            whenever(getPopularMovies.invoke()).thenReturn(movies)
+            whenever(getPopularMovies.invoke()).thenReturn(SuccessResponse(movies))
             vm.model.observeForever(observer)
 
             vm.onCoarsePermissionRequested()
@@ -62,7 +63,7 @@ class MainViewModelTest {
 
         runBlocking {
             val movies = listOf(mockedMovie.copy(id = 1))
-            whenever(getPopularMovies.invoke()).thenReturn(movies)
+            whenever(getPopularMovies.invoke()).thenReturn(SuccessResponse(movies))
 
             vm.model.observeForever(observer)
 

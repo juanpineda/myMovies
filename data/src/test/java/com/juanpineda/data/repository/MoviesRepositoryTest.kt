@@ -1,5 +1,6 @@
 package com.juanpineda.data.repository
 
+import com.juanpineda.data.result.SuccessResponse
 import com.juanpineda.data.source.LocalDataSource
 import com.juanpineda.data.source.RemoteDataSource
 import com.juanpineda.mymovies.testshared.mockedMovie
@@ -56,7 +57,7 @@ class MoviesRepositoryTest {
 
             val remoteMovies = listOf(mockedMovie.copy(2))
             whenever(localDataSource.isEmpty()).thenReturn(true)
-            whenever(remoteDataSource.getPopularMovies(any(), any())).thenReturn(remoteMovies)
+            whenever(remoteDataSource.getPopularMovies(any(), any())).thenReturn(SuccessResponse(remoteMovies))
             whenever(regionRepository.findLastRegion()).thenReturn("US")
 
             moviesRepository.getPopularMovies()

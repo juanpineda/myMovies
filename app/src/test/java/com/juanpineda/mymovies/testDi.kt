@@ -1,6 +1,7 @@
 package com.juanpineda.mymovies
 
 import com.juanpineda.data.repository.PermissionChecker
+import com.juanpineda.data.result.SuccessResponse
 import com.juanpineda.data.source.LocalDataSource
 import com.juanpineda.data.source.LocationDataSource
 import com.juanpineda.data.source.RemoteDataSource
@@ -57,7 +58,7 @@ class FakeRemoteDataSource : RemoteDataSource {
 
     var movies = defaultFakeMovies
 
-    override suspend fun getPopularMovies(apiKey: String, region: String) = movies
+    override suspend fun getPopularMovies(apiKey: String, region: String) = SuccessResponse(movies)
 }
 
 class FakeLocationDataSource : LocationDataSource {

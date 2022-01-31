@@ -1,6 +1,8 @@
 package com.juanpineda.usecases
 
 import com.juanpineda.data.repository.MoviesRepository
+import com.juanpineda.data.result.SuccessResponse
+import com.juanpineda.data.result.onSuccess
 import com.juanpineda.mymovies.testshared.mockedMovie
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
@@ -29,11 +31,11 @@ class GetPopularMoviesTest {
         runBlocking {
 
             val movies = listOf(mockedMovie.copy(id = 1))
-            whenever(moviesRepository.getPopularMovies()).thenReturn(movies)
+            whenever(moviesRepository.getPopularMovies()).thenReturn(SuccessResponse(movies))
 
-            val result = getPopularMovies.invoke()
-
-            Assert.assertEquals(movies, result)
+            getPopularMovies.invoke().onSuccess {
+                Assert.assertEquals(movies, it)
+            }
         }
     }
 }

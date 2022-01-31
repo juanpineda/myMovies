@@ -2,10 +2,13 @@ package com.juanpineda.mymovies.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.juanpineda.data.result.onError
+import com.juanpineda.data.result.onSuccess
 import com.juanpineda.domain.Movie
 import com.juanpineda.mymovies.ui.common.ScopedViewModel
 import com.juanpineda.usecases.GetPopularMovies
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -23,6 +26,7 @@ class MainViewModel(
     sealed class UiModel {
         object Loading : UiModel()
         data class Content(val movies: List<Movie>) : UiModel()
+        object Error : UiModel()
         data class Navigation(val movie: Movie) : UiModel()
         object RequestLocationPermission : UiModel()
     }
@@ -31,14 +35,20 @@ class MainViewModel(
         initScope()
     }
 
-    private fun refresh() {
+    fun refresh() {
         _model.value = UiModel.RequestLocationPermission
     }
 
     fun onCoarsePermissionRequested() {
         launch {
             _model.value = UiModel.Loading
-            _model.value = UiModel.Content(getPopularMovies.invoke())
+            getPopularMovies.invoke()
+                .onSuccess {
+                    it.collect { movies ->
+                        _model.value = UiModel.Content(movies)
+                    }
+                }
+                .onError { _model.value = UiModel.Error }
         }
     }
 

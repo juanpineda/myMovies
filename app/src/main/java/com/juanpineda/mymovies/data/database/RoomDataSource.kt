@@ -5,6 +5,8 @@ import com.juanpineda.domain.Movie
 import com.juanpineda.mymovies.data.toDomainMovie
 import com.juanpineda.mymovies.data.toRoomMovie
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class RoomDataSource(db: MovieDatabase) : LocalDataSource {
@@ -18,8 +20,8 @@ class RoomDataSource(db: MovieDatabase) : LocalDataSource {
         withContext(Dispatchers.IO) { movieDao.insertMovies(movies.map { it.toRoomMovie() }) }
     }
 
-    override suspend fun getPopularMovies(): List<Movie> = withContext(Dispatchers.IO) {
-        movieDao.getAll().map { it.toDomainMovie() }
+    override suspend fun getPopularMovies(): Flow<List<Movie>> = withContext(Dispatchers.IO) {
+        movieDao.getAll().map { list -> list.map { it.toDomainMovie() } }
     }
 
     override suspend fun findById(id: Int): Movie = withContext(Dispatchers.IO) {

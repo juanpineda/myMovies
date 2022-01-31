@@ -18,7 +18,9 @@ import com.juanpineda.mymovies.ui.detail.DetailViewModel
 import com.juanpineda.mymovies.ui.main.MainActivity
 import com.juanpineda.mymovies.ui.main.MainViewModel
 import com.juanpineda.usecases.FindMovieById
+import com.juanpineda.usecases.GetMovieImages
 import com.juanpineda.usecases.GetPopularMovies
+import com.juanpineda.usecases.RateMovie
 import com.juanpineda.usecases.ToggleMovieFavorite
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -62,8 +64,10 @@ private val scopesModule = module {
     }
 
     scope(named<DetailActivity>()) {
-        viewModel { (id: Int) -> DetailViewModel(id, get(), get(), get()) }
+        viewModel { (id: Int) -> DetailViewModel(id, get(), get(), get(), get(), get()) }
         scoped { FindMovieById(get()) }
         scoped { ToggleMovieFavorite(get()) }
+        scoped { RateMovie(get()) }
+        scoped { GetMovieImages(get()) }
     }
 }

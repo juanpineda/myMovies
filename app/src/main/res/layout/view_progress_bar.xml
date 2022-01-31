@@ -1,0 +1,42 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ProgressBar
+        android:id="@+id/progressBarMovies"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/circle_shape"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="65"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewProgressValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="75"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBarMovies"
+        app:layout_constraintEnd_toEndOf="@+id/progressBarMovies"
+        app:layout_constraintStart_toStartOf="@+id/progressBarMovies"
+        app:layout_constraintTop_toTopOf="@+id/progressBarMovies" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="8sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewProgressValue"
+        app:layout_constraintTop_toTopOf="@+id/textViewProgressValue" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

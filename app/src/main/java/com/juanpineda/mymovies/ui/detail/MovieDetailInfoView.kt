@@ -28,8 +28,8 @@ class MovieDetailInfoView @JvmOverloads constructor(
             bold { append("Popularity: ") }
             appendLine(popularity.toString())
 
-            bold { append("Vote Average: ") }
-            append(voteAverage.toString())
+            bold { append("18+: ") }
+            append(if (adult) "Yes" else "No")
         }
     }
 }

@@ -2,6 +2,7 @@ package com.juanpineda.mymovies.ui.main
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.juanpineda.domain.Movie
 import com.juanpineda.mymovies.R
@@ -36,6 +37,15 @@ class MoviesAdapter(private val listener: (Movie) -> Unit) :
         fun bind(movie: Movie) = with(binding) {
             movieTitle.text = movie.title
             movieCover.loadUrl("https://image.tmdb.org/t/p/w185/${movie.posterPath}")
+            movieTitle.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                null,
+                null,
+                ContextCompat.getDrawable(
+                    itemView.context,
+                    if (movie.favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off
+                ),
+            )
         }
     }
 }

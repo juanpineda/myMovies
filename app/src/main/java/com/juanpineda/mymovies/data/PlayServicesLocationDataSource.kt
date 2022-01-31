@@ -25,7 +25,12 @@ class PlayServicesLocationDataSource(application: Application) : LocationDataSou
 
     private fun Location?.toRegion(): String? {
         val addresses = this?.let {
-            geocoder.getFromLocation(latitude, longitude, 1)
+            try {
+                geocoder.getFromLocation(latitude, longitude, 1)
+            }
+            catch (e:Exception){
+                null
+            }
         }
         return addresses?.firstOrNull()?.countryCode
     }

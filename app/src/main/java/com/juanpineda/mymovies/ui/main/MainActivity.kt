@@ -3,7 +3,10 @@ package com.juanpineda.mymovies.ui.main
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import com.juanpineda.mymovies.databinding.ActivityMainBinding
 import com.juanpineda.mymovies.ui.common.PermissionRequester
 import com.juanpineda.mymovies.ui.common.startActivity
@@ -32,17 +35,24 @@ class MainActivity : ScopeActivity() {
     }
 
     private fun updateUi(model: UiModel) {
-
-        binding.progress.visibility = if (model is UiModel.Loading) View.VISIBLE else View.GONE
-
+        binding.progress.visibility = if (model is UiModel.Loading) VISIBLE else GONE
         when (model) {
             is UiModel.Content -> adapter.movies = model.movies
             is UiModel.Navigation -> startActivity<DetailActivity> {
                 putExtra(DetailActivity.MOVIE, model.movie.id)
             }
+            UiModel.Error -> showError()
             UiModel.RequestLocationPermission -> coarsePermissionRequester.request {
                 viewModel.onCoarsePermissionRequested()
             }
+        }
+    }
+
+    private fun showError(){
+        binding.layoutError.layoutViewError.visibility = VISIBLE
+        binding.layoutError.buttonError.setOnClickListener {
+            binding.layoutError.layoutViewError.visibility = GONE
+            viewModel.refresh()
         }
     }
 }

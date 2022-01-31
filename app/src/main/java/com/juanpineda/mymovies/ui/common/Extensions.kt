@@ -3,9 +3,11 @@ package com.juanpineda.mymovies.ui.common
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentActivity
@@ -14,8 +16,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.juanpineda.mymovies.MoviesApp
 import com.bumptech.glide.Glide
+import com.juanpineda.domain.MovieImage
+import com.juanpineda.mymovies.ui.detail.DetailMovieImagesAdapter
 import kotlin.properties.Delegates
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = true): View =
@@ -54,6 +59,25 @@ inline fun <VH : RecyclerView.ViewHolder, T> RecyclerView.Adapter<VH>.basicDiffU
             override fun getNewListSize(): Int = new.size
         }).dispatchUpdatesTo(this@basicDiffUtil)
     }
+
+fun ViewPager2.loadContent(list: List<MovieImage>) =
+    apply {
+        offscreenPageLimit = 1
+        (getChildAt(0) as RecyclerView).apply {
+            context.getScreenWidth().div(4).let {
+                setPadding(it, 0, it, 0)
+                clipToPadding = false
+            }
+        }
+        adapter = DetailMovieImagesAdapter(list)
+    }
+
+fun Context.getScreenWidth(): Int {
+    val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    val dm = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(dm)
+    return dm.widthPixels
+}
 
 @Suppress("UNCHECKED_CAST")
 inline fun <reified T : ViewModel> FragmentActivity.getViewModel(crossinline factory: () -> T): T {
