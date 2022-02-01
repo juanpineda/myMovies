@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">My Movies</string>
     <string name="api_key" >8585ed85b09caf3e49c1a26d52195bd1</string>
-    <string name="detail_movie_add_to_favorite" >Añadido a tus favoritos</string>
-    <string name="dialog_detail_movie_vote_title" >Califica esta película</string>
-    <string name="dialog_detail_movie_vote_subtitle" >Recuerda que puedes votar una vez por cada film</string>
-    <string name="dialog_detail_movie_vote_button" >Guardar</string>
-    <string name="error_movie_title" >Tenemos inconvenientes.\nIntenta más tarde.</string>
-    <string name="error_movie_vote_button" >Reintentar</string>
+    <string name="detail_movie_add_to_favorite" >Added to your favorites</string>
+    <string name="dialog_detail_movie_vote_title" >Rate this movie</string>
+    <string name="dialog_detail_movie_vote_subtitle" >Remember that you can vote once for each film</string>
+    <string name="dialog_detail_movie_vote_button" >Save</string>
+    <string name="error_movie_title" >We are having trouble.\nPlease try again later.</string>
+    <string name="error_movie_vote_button" >Retry</string>
     <string name="progress_bar_text" >%</string>
     <string name="movie_detail_info_view_item_1" >Original language: </string>
     <string name="movie_detail_info_view_item_2" >Original title: </string>
