@@ -42,7 +42,7 @@ Relevant pattern:
 
 App Description
 
-Main view scroll list of movies filtered by location and favorite at the beginning managing errors with remote data source
+Main view scroll list of movies filtered by location and favorite at the beginning managing errors with remote data source.
 Second view description of the movie selected on the list, added a detailed description to show more information, list of images from the movie, favorite button interaction, and rating bar with dialog confirmation.
 
 
