@@ -65,7 +65,7 @@ class DetailIntegrationTests : AutoCloseKoinTest() {
     fun `observing LiveData finds the movie`() {
         vm.model.observeForever(observer)
 
-        verify(observer).onChanged(DetailViewModel.UiModel.ContentMovie(mockedMovie.copy(1)))
+        verify(observer).onChanged(DetailViewModel.UiModel.ContentMovie(defaultFakeMovies[0]))
     }
 
     @Test

@@ -9,6 +9,7 @@ import com.juanpineda.mymovies.testshared.mockedMovieImage
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -48,9 +49,11 @@ class MoviesRepositoryTest {
             whenever(localDataSource.isEmpty()).thenReturn(false)
             whenever(localDataSource.getPopularMovies()).thenReturn(flowOf(localMovies))
 
-            val result = moviesRepository.getPopularMovies()
-
-            assertEquals(localMovies, result)
+            moviesRepository.getPopularMovies().onSuccess {
+                it.collect {
+                    assertEquals(localMovies, it)
+                }
+            }
         }
     }
 

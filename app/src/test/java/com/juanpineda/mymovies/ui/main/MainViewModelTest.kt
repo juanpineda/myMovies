@@ -96,8 +96,6 @@ class MainViewModelTest {
         runBlocking {
             val movie = mockedMovie
 
-            whenever(getPopularMovies.invoke()).thenReturn(ErrorResponse(Failure.UnknownException))
-
             vm.model.observeForever(observer)
 
             vm.onMovieClicked(movie)

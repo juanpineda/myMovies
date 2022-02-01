@@ -49,7 +49,7 @@ class MovieProgressBarView : ConstraintLayout {
         when (value) {
             in 0..45 -> R.color.colorAccent
             in 45..70 -> R.color.uik_yellow
-            in 70..100 -> R.color.colorPrimary
+            in 70..100 -> R.color.uik_green
             else -> R.color.colorAccent
         }
 }

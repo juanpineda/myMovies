@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import com.juanpineda.domain.Movie
+import com.juanpineda.mymovies.R
 
 class MovieDetailInfoView @JvmOverloads constructor(
     context: Context,
@@ -16,20 +17,23 @@ class MovieDetailInfoView @JvmOverloads constructor(
     fun setMovie(movie: Movie) = with(movie) {
         text = buildSpannedString {
 
-            bold { append("Original language: ") }
+            bold { append(context.getString(R.string.movie_detail_info_view_item_1)) }
             appendLine(originalLanguage)
 
-            bold { append("Original title: ") }
+            bold { append(context.getString(R.string.movie_detail_info_view_item_2)) }
             appendLine(originalTitle)
 
-            bold { append("Release date: ") }
+            bold { append(context.getString(R.string.movie_detail_info_view_item_3)) }
             appendLine(releaseDate)
 
-            bold { append("Popularity: ") }
+            bold { append(context.getString(R.string.movie_detail_info_view_item_4)) }
             appendLine(popularity.toString())
 
-            bold { append("18+: ") }
-            append(if (adult) "Yes" else "No")
+            bold { append(context.getString(R.string.movie_detail_info_view_item_5)) }
+            append(
+                if (adult) context.getString(R.string.movie_detail_info_view_item_5_yes)
+                else context.getString(R.string.movie_detail_info_view_item_5_no)
+            )
         }
     }
 }

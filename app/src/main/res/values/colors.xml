@@ -6,4 +6,5 @@
 
     <color name="lightBackground">#E0E0E0</color>
     <color name="uik_yellow">#f4d03f</color>
+    <color name="uik_green">#008577</color>
 </resources>

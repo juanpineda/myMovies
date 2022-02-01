@@ -8,4 +8,11 @@
     <string name="error_movie_title" >Tenemos inconvenientes.\nIntenta más tarde.</string>
     <string name="error_movie_vote_button" >Reintentar</string>
     <string name="progress_bar_text" >%</string>
+    <string name="movie_detail_info_view_item_1" >Original language: </string>
+    <string name="movie_detail_info_view_item_2" >Original title: </string>
+    <string name="movie_detail_info_view_item_3" >Release date: </string>
+    <string name="movie_detail_info_view_item_4" >Popularity: </string>
+    <string name="movie_detail_info_view_item_5" >18+: </string>
+    <string name="movie_detail_info_view_item_5_yes" >Yes</string>
+    <string name="movie_detail_info_view_item_5_no" >No</string>
 </resources>
