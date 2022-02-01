@@ -9,7 +9,7 @@
 
 ### Android Studio Artic Fox 2020.3.1 patch 3
 
-Android Project Mvvm Clean Architecture 4 Layers.
+Android Project MVVM Clean Architecture 4 Layers.
 
 Relevant Tech implemented:
 
@@ -42,8 +42,8 @@ Relevant pattern:
 
 App Description
 
-Main view scroll list of movies filtered by location and favorite at the beginning managing errors with remote data source.
-Second view description of the movie selected on the list, added a detailed description to show more information, list of images from the movie, favorite button interaction, and rating bar with dialog confirmation.
+The main view contains a scrolling list of movies filtered by location and favorite, managing errors with a remote data source.
+The second view describes the movie selected in the list, added a detailed description to show more information, a list of images from the movie, favorite button interaction, and a rating bar with dialog confirmation.
 
 
 ## Author
