@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.juanpineda.domain.Movie
 import com.juanpineda.mymovies.R
+import com.juanpineda.mymovies.data.server.BASE_URL_IMAGES_185
 import com.juanpineda.mymovies.databinding.ViewMovieBinding
 import com.juanpineda.mymovies.ui.common.basicDiffUtil
 import com.juanpineda.mymovies.ui.common.inflate
@@ -36,7 +37,7 @@ class MoviesAdapter(private val listener: (Movie) -> Unit) :
         private val binding = ViewMovieBinding.bind(view)
         fun bind(movie: Movie) = with(binding) {
             movieTitle.text = movie.title
-            movieCover.loadUrl("https://image.tmdb.org/t/p/w185/${movie.posterPath}")
+            movieCover.loadUrl(BASE_URL_IMAGES_185 + movie.posterPath)
             movieTitle.setCompoundDrawablesWithIntrinsicBounds(
                 null,
                 null,

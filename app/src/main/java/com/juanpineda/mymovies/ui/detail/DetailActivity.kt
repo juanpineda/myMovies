@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
 import com.juanpineda.domain.Movie
 import com.juanpineda.domain.MovieImage
 import com.juanpineda.mymovies.R
+import com.juanpineda.mymovies.data.server.BASE_URL_IMAGES_780
 import com.juanpineda.mymovies.databinding.ActivityDetailBinding
 import com.juanpineda.mymovies.ui.common.applyVote
 import com.juanpineda.mymovies.ui.common.loadContent
@@ -56,7 +57,7 @@ class DetailActivity : ScopeActivity(), RatingBar.OnRatingBarChangeListener {
 
     private fun loadMovieView(movie: Movie) = with(binding) {
         movieDetailToolbar.title = movie.title
-        movieDetailImage.loadUrl("https://image.tmdb.org/t/p/w780${movie.backdropPath}")
+        movieDetailImage.loadUrl(BASE_URL_IMAGES_780 + movie.backdropPath)
         movieDetailSummary.text = movie.overview
         movieDetailInfo.setMovie(movie)
         loadFavoriteView(movie, false)

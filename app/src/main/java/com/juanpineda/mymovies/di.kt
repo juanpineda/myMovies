@@ -11,6 +11,7 @@ import com.juanpineda.mymovies.data.AndroidPermissionChecker
 import com.juanpineda.mymovies.data.PlayServicesLocationDataSource
 import com.juanpineda.mymovies.data.database.MovieDatabase
 import com.juanpineda.mymovies.data.database.RoomDataSource
+import com.juanpineda.mymovies.data.server.BASE_URL
 import com.juanpineda.mymovies.data.server.TheMovieDb
 import com.juanpineda.mymovies.data.server.TheMovieDbDataSource
 import com.juanpineda.mymovies.ui.detail.DetailActivity
@@ -48,7 +49,7 @@ private val appModule = module {
     factory<LocationDataSource> { PlayServicesLocationDataSource(get()) }
     factory<PermissionChecker> { AndroidPermissionChecker(get()) }
     single<CoroutineDispatcher> { Dispatchers.Main }
-    single(named("baseUrl")) { "https://api.themoviedb.org/3/" }
+    single(named("baseUrl")) { BASE_URL }
     single { TheMovieDb(get(named("baseUrl"))) }
 }
 
