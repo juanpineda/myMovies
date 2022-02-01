@@ -6,5 +6,5 @@ import com.juanpineda.domain.MovieImage
 
 interface RemoteDataSource {
     suspend fun getPopularMovies(apiKey: String, region: String): ResultHandler<List<Movie>>
-    suspend fun getMovieImages(apiKey: String, movieId:Int): List<MovieImage>
+    suspend fun getMovieImages(apiKey: String, movieId: Int): ResultHandler<List<MovieImage>>
 }

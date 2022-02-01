@@ -1,39 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?attr/selectableItemBackground"
-    android:orientation="vertical"
-    android:padding="2dp">
+    android:layout_margin="2dp"
+    android:elevation="10dp"
+    app:cardCornerRadius="4dp">
 
-    <com.juanpineda.mymovies.ui.common.AspectRatioImageView
-        android:id="@+id/movieCover"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:ratio="1.5"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/movieTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/colorPrimaryDark"
-        android:gravity="center"
-        android:lines="2"
-        android:minLines="2"
-        android:padding="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
-        app:drawableBottomCompat="@drawable/ic_favorite_on"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieCover"
-        tools:text="@tools:sample/lorem" />
+        <com.juanpineda.mymovies.ui.common.AspectRatioImageView
+            android:id="@+id/movieCover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightBackground"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/movieTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:ratio="1.5" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/movieTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:lines="2"
+            android:minLines="2"
+            android:padding="8dp"
+            android:ellipsize="end"
+            android:text="@tools:sample/lorem"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+            app:drawableBottomCompat="@drawable/ic_favorite_on"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movieCover" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

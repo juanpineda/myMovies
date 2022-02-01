@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.RatingBar
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
@@ -71,6 +72,12 @@ fun ViewPager2.loadContent(list: List<MovieImage>) =
         }
         adapter = DetailMovieImagesAdapter(list)
     }
+
+fun RatingBar.applyVote(listener: RatingBar.OnRatingBarChangeListener, value: Float) {
+    onRatingBarChangeListener = null
+    rating = value
+    onRatingBarChangeListener = listener
+}
 
 fun Context.getScreenWidth(): Int {
     val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
