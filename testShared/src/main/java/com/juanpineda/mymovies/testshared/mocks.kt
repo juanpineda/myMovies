@@ -1,6 +1,16 @@
 package com.juanpineda.mymovies.testshared
 
 import com.juanpineda.domain.Movie
+import com.juanpineda.domain.MovieImage
+
+val mockedMovieImage = MovieImage(
+    0.0,
+    "/path",
+    0,
+    10.0,
+    2,
+    100
+)
 
 val mockedMovie = Movie(
     0,

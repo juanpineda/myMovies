@@ -1,8 +1,10 @@
 package com.juanpineda.usecases
 
 import com.juanpineda.data.repository.MoviesRepository
+import com.juanpineda.data.result.SuccessResponse
 import com.juanpineda.mymovies.testshared.mockedMovie
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -31,9 +33,9 @@ class ToggleMovieFavoriteTest {
 
             val movie = mockedMovie.copy(id = 1)
 
-            val result = toggleMovieFavorite.invoke(movie)
+            toggleMovieFavorite.invoke(movie.id)
 
-            verify(moviesRepository).update(result)
+            verify(moviesRepository).toggleMovieFavorite(movie.id)
         }
     }
 
@@ -41,23 +43,13 @@ class ToggleMovieFavoriteTest {
     fun `favorite movie becomes unfavorite`() {
         runBlocking {
 
-            val movie = mockedMovie.copy(favorite = true)
-
-            val result = toggleMovieFavorite.invoke(movie)
+            val movie = mockedMovie.copy(id = 1, favorite = true)
+            whenever(moviesRepository.toggleMovieFavorite(1)).thenReturn(
+                movie.copy(favorite = false)
+            )
+            val result = toggleMovieFavorite.invoke(1)
 
             assertFalse(result.favorite)
-        }
-    }
-
-    @Test
-    fun `unfavorite movie becomes favorite`() {
-        runBlocking {
-
-            val movie = mockedMovie.copy(favorite = false)
-
-            val result = toggleMovieFavorite.invoke(movie)
-
-            assertTrue(result.favorite)
         }
     }
 }

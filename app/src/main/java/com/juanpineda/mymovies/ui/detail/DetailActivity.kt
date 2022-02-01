@@ -55,7 +55,7 @@ class DetailActivity : ScopeActivity(), RatingBar.OnRatingBarChangeListener {
     }
 
     private fun loadMovieView(movie: Movie) = with(binding) {
-        movieDetailToolbar.title = title
+        movieDetailToolbar.title = movie.title
         movieDetailImage.loadUrl("https://image.tmdb.org/t/p/w780${movie.backdropPath}")
         movieDetailSummary.text = movie.overview
         movieDetailInfo.setMovie(movie)

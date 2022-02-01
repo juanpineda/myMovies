@@ -6,12 +6,10 @@ import com.juanpineda.data.result.SuccessResponse
 import com.juanpineda.data.result.error.Failure
 import com.juanpineda.data.result.onError
 import com.juanpineda.data.result.onSuccess
-import com.juanpineda.mymovies.testshared.mockedMovie
+import com.juanpineda.mymovies.testshared.mockedMovieImage
 import com.nhaarman.mockitokotlin2.whenever
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,42 +17,39 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class GetPopularMoviesTest {
+class GetMovieImagesTest {
 
     @Mock
     lateinit var moviesRepository: MoviesRepository
 
-    lateinit var getPopularMovies: GetPopularMovies
+    lateinit var getMovieImages: GetMovieImages
 
     @Before
     fun setUp() {
-        getPopularMovies = GetPopularMovies(moviesRepository)
+        getMovieImages = GetMovieImages(moviesRepository)
     }
 
     @Test
-    fun `invoke calls movies repository`() {
+    fun `invoke calls movies repository return success`() {
         runBlocking {
 
-            val movies = listOf(mockedMovie.copy(id = 1))
-            whenever(moviesRepository.getPopularMovies()).thenReturn(SuccessResponse(flowOf(movies)))
+            val movieImages = listOf(mockedMovieImage)
+            whenever(moviesRepository.getMovieImages(1)).thenReturn(SuccessResponse(movieImages))
 
-            getPopularMovies.invoke().onSuccess {
-                it.collect {
-                    Assert.assertEquals(movies, it)
-                }
+            getMovieImages.invoke(1).onSuccess {
+                assertEquals(movieImages, it)
             }
         }
     }
-
 
     @Test
     fun `invoke calls movies repository return error UnknownException`() {
         runBlocking {
 
-            whenever(moviesRepository.getPopularMovies()).thenReturn(ErrorResponse(Failure.UnknownException))
+            whenever(moviesRepository.getMovieImages(1)).thenReturn(ErrorResponse(Failure.UnknownException))
 
-            getPopularMovies.invoke().onError {
-                Assert.assertEquals(Failure.UnknownException, failure)
+            getMovieImages.invoke(1).onError {
+                assertEquals(Failure.UnknownException, failure)
             }
         }
     }
@@ -63,10 +58,10 @@ class GetPopularMoviesTest {
     fun `invoke calls movies repository return error NetworkConnection`() {
         runBlocking {
             val networkConnection = Failure.NetworkConnection(Exception())
-            whenever(moviesRepository.getPopularMovies()).thenReturn(ErrorResponse(networkConnection))
+            whenever(moviesRepository.getMovieImages(1)).thenReturn(ErrorResponse(networkConnection))
 
-            getPopularMovies.invoke().onError {
-                Assert.assertEquals(networkConnection, failure)
+            getMovieImages.invoke(1).onError {
+                assertEquals(networkConnection, failure)
             }
         }
     }

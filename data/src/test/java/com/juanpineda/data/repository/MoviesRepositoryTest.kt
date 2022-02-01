@@ -1,12 +1,15 @@
 package com.juanpineda.data.repository
 
 import com.juanpineda.data.result.SuccessResponse
+import com.juanpineda.data.result.onSuccess
 import com.juanpineda.data.source.LocalDataSource
 import com.juanpineda.data.source.RemoteDataSource
 import com.juanpineda.mymovies.testshared.mockedMovie
+import com.juanpineda.mymovies.testshared.mockedMovieImage
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -43,7 +46,7 @@ class MoviesRepositoryTest {
 
             val localMovies = listOf(mockedMovie.copy(1))
             whenever(localDataSource.isEmpty()).thenReturn(false)
-            whenever(localDataSource.getPopularMovies()).thenReturn(localMovies)
+            whenever(localDataSource.getPopularMovies()).thenReturn(flowOf(localMovies))
 
             val result = moviesRepository.getPopularMovies()
 
@@ -57,7 +60,11 @@ class MoviesRepositoryTest {
 
             val remoteMovies = listOf(mockedMovie.copy(2))
             whenever(localDataSource.isEmpty()).thenReturn(true)
-            whenever(remoteDataSource.getPopularMovies(any(), any())).thenReturn(SuccessResponse(remoteMovies))
+            whenever(remoteDataSource.getPopularMovies(any(), any())).thenReturn(
+                SuccessResponse(
+                    remoteMovies
+                )
+            )
             whenever(regionRepository.findLastRegion()).thenReturn("US")
 
             moviesRepository.getPopularMovies()
@@ -80,14 +87,45 @@ class MoviesRepositoryTest {
     }
 
     @Test
-    fun `update updates local data source`() {
+    fun `toggleMovieFavorite updates local data source`() {
         runBlocking {
 
             val movie = mockedMovie.copy(id = 1)
+            whenever(localDataSource.findById(1)).thenReturn(movie)
 
-            moviesRepository.update(movie)
+            moviesRepository.toggleMovieFavorite(1)
+
+            verify(localDataSource).update(movie.copy(favorite = !movie.favorite))
+        }
+    }
+
+    @Test
+    fun `rateMovie updates local data source`() {
+        runBlocking {
+
+            val movie = mockedMovie.copy(id = 1, myVote = 4f)
+            whenever(localDataSource.findById(1)).thenReturn(movie)
+
+            moviesRepository.rateMovie(1, 4f)
 
             verify(localDataSource).update(movie)
+        }
+    }
+
+    @Test
+    fun `getMovieImages calls local data source`() {
+        runBlocking {
+
+            val movieImages = listOf(mockedMovieImage)
+            whenever(remoteDataSource.getMovieImages(apiKey, 5)).thenReturn(
+                SuccessResponse(
+                    movieImages
+                )
+            )
+
+            moviesRepository.getMovieImages(5).onSuccess {
+                assertEquals(movieImages, it)
+            }
         }
     }
 }
