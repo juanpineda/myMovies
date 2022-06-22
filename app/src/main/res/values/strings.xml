@@ -1,18 +1,19 @@
 <resources>
     <string name="app_name">My Movies</string>
-    <string name="api_key" >8585ed85b09caf3e49c1a26d52195bd1</string>
-    <string name="detail_movie_add_to_favorite" >Added to your favorites</string>
-    <string name="dialog_detail_movie_vote_title" >Rate this movie</string>
-    <string name="dialog_detail_movie_vote_subtitle" >Remember that you can vote once for each film</string>
-    <string name="dialog_detail_movie_vote_button" >Save</string>
-    <string name="error_movie_title" >We are having trouble.\nPlease try again later.</string>
-    <string name="error_movie_vote_button" >Retry</string>
-    <string name="progress_bar_text" >%</string>
-    <string name="movie_detail_info_view_item_1" >Original language: </string>
-    <string name="movie_detail_info_view_item_2" >Original title: </string>
-    <string name="movie_detail_info_view_item_3" >Release date: </string>
-    <string name="movie_detail_info_view_item_4" >Popularity: </string>
-    <string name="movie_detail_info_view_item_5" >18+: </string>
-    <string name="movie_detail_info_view_item_5_yes" >Yes</string>
-    <string name="movie_detail_info_view_item_5_no" >No</string>
+    <string name="api_key">8585ed85b09caf3e49c1a26d52195bd1</string>
+    <string name="detail_movie_add_to_favorite">Added to your favorites</string>
+    <string name="dialog_detail_movie_vote_title">Rate this movie</string>
+    <string name="dialog_detail_movie_vote_subtitle">Remember that you can vote once for each film</string>
+    <string name="dialog_detail_movie_vote_button">Save</string>
+    <string name="error_movie_title">We are having trouble.\nPlease try again later.</string>
+    <string name="error_movie_vote_button">Retry</string>
+    <string name="progress_bar_text">%</string>
+    <string name="movie_detail_info_view_item_1">Original language: </string>
+    <string name="movie_detail_info_view_item_2">Original title: </string>
+    <string name="movie_detail_info_view_item_3">Release date: </string>
+    <string name="movie_detail_info_view_item_4">Popularity: </string>
+    <string name="movie_detail_info_view_item_5">18+: </string>
+    <string name="movie_detail_info_view_item_5_yes">Yes</string>
+    <string name="movie_detail_info_view_item_5_no">No</string>
+    <string name="title_activity_compose">ComposeActivity</string>
 </resources>

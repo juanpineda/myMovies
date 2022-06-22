@@ -1,8 +1,11 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.4.30'
-    ext.appcompat_version = '1.2.0'
+    ext {
+        compose_version = '1.0.3'
+    }
+    ext.kotlin_version = '1.5.30'
+    ext.appcompat_version = '1.3.1'
     ext.recyclerview_version = '1.1.0'
     ext.constraintlayout_version = '2.0.4'
     ext.androidxCore_version = '1.3.2'
@@ -15,11 +18,11 @@ buildscript {
     ext.coroutines_version = '1.4.2'
     ext.okhttpLoginInterceptor_version = '4.9.0'
     ext.retrofit_version = '2.9.0'
-    ext.koin_version = '2.2.2'
+    ext.koin_version = '3.0.1'
     ext.junit_version = '4.13.1'
     ext.mockitoKotlin_version = '2.2.0'
     ext.mockitoInline_version = '2.28.2'
-    ext.koinTest_version = '2.2.0-rc-4'
+    ext.koinTest_version = '3.0.1'
     ext.archCoreTesting_version = '2.1.0'
     ext.testRunner_version = '1.3.0'
     ext.espresso_version = '3.3.0'
@@ -29,13 +32,10 @@ buildscript {
     ext.okhttpIdling_version = '1.0.0'
     repositories {
         google()
-        jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:7.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -46,7 +46,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     ext {
@@ -79,14 +79,14 @@ allprojects {
                 okhttpLoginInterceptor   : "com.squareup.okhttp3:logging-interceptor:$okhttpLoginInterceptor_version",
                 retrofit                 : "com.squareup.retrofit2:retrofit:$retrofit_version",
                 retrofitGsonConverter    : "com.squareup.retrofit2:converter-gson:$retrofit_version",
-                koin                     : "org.koin:koin-androidx-viewmodel:$koin_version"
+                koin                     : "io.insert-koin:koin-android:$koin_version"
         ]
 
         testLibs = [
                 junit        : "junit:junit:$junit_version",
                 mockitoKotlin: "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlin_version",
                 mockitoInline: "org.mockito:mockito-inline:$mockitoInline_version",
-                koinTest     : "org.koin:koin-test:$koinTest_version",
+                koinTest     : "io.insert-koin:koin-test:$koinTest_version",
                 testShared   : project(':testShared')
         ]
 

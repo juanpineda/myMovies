@@ -1,16 +1,14 @@
 package com.juanpineda.mymovies.ui.main
 
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.composethemeadapter.MdcTheme
 import com.juanpineda.domain.Movie
-import com.juanpineda.mymovies.R
-import com.juanpineda.mymovies.data.server.BASE_URL_IMAGES_185
-import com.juanpineda.mymovies.databinding.ViewMovieBinding
 import com.juanpineda.mymovies.ui.common.basicDiffUtil
-import com.juanpineda.mymovies.ui.common.inflate
-import com.juanpineda.mymovies.ui.common.loadUrl
 
 class MoviesAdapter(private val listener: (Movie) -> Unit) :
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
@@ -21,8 +19,7 @@ class MoviesAdapter(private val listener: (Movie) -> Unit) :
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = parent.inflate(R.layout.view_movie, false)
-        return ViewHolder(view)
+        return ViewHolder(ComposeView(parent.context), listener)
     }
 
     override fun getItemCount(): Int = movies.size
@@ -33,20 +30,26 @@ class MoviesAdapter(private val listener: (Movie) -> Unit) :
         holder.itemView.setOnClickListener { listener(movie) }
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ViewMovieBinding.bind(view)
-        fun bind(movie: Movie) = with(binding) {
-            movieTitle.text = movie.title
-            movieCover.loadUrl(BASE_URL_IMAGES_185 + movie.posterPath)
-            movieTitle.setCompoundDrawablesWithIntrinsicBounds(
-                null,
-                null,
-                null,
-                ContextCompat.getDrawable(
-                    itemView.context,
-                    if (movie.favorite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off
-                ),
-            )
+    override fun onViewRecycled(holder: ViewHolder) {
+        holder.composeView.disposeComposition()
+    }
+
+    class ViewHolder(
+        val composeView: ComposeView,
+        private val listener: (Movie) -> Unit
+    ) :
+        RecyclerView.ViewHolder(composeView) {
+
+        init {
+            composeView.setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+        }
+
+        fun bind(movie: Movie) {
+            composeView.setContent {
+                MdcTheme{
+                    MovieItemView(movie = movie, Modifier.clickable { listener(movie) })
+                }
+            }
         }
     }
 }

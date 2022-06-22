@@ -30,12 +30,13 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 fun Application.initDI() {
     startKoin {
-        androidLogger()
+        androidLogger(Level.ERROR)
         androidContext(this@initDI)
         modules(listOf(appModule, dataModule, scopesModule))
     }
